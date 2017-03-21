@@ -109,18 +109,19 @@ public class CourseReviewsDisplay extends AppCompatActivity{
                     // Oldest to newest
                     if(position == 0) {
                         new_display = (ArrayList<CourseReview>) reviews.clone();
+                        Collections.shuffle(new_display);
                     }
                     if(position == 1) {
                         //Newest to oldest
                         new_display = (ArrayList<CourseReview>) reviews.clone();
-                        Collections.reverse(new_display);
+                        Collections.shuffle(new_display);
                     }
                     if(position == 2) {
                         // Rating - high to low
                         new_display = (ArrayList<CourseReview>) reviews.clone();
                         Collections.sort(new_display, new Comparator<CourseReview>() {
                             @Override public int compare(CourseReview c1, CourseReview c2) {
-                                return (int)(c2.rating*2) - (int)(c1.rating*2); // Ascending
+                                return (int)(c2.rating) - (int)(c1.rating); // Ascending
                             }
 
                         });
@@ -130,7 +131,7 @@ public class CourseReviewsDisplay extends AppCompatActivity{
                         new_display = (ArrayList<CourseReview>) reviews.clone();
                         Collections.sort(new_display, new Comparator<CourseReview>() {
                             @Override public int compare(CourseReview c1, CourseReview c2) {
-                                return (int)(c1.rating*2) - (int)(c2.rating*2); // Ascending
+                                return (int)(c1.rating) - (int)(c2.rating); // Ascending
                             }
 
                         });
@@ -140,7 +141,7 @@ public class CourseReviewsDisplay extends AppCompatActivity{
                         new_display = (ArrayList<CourseReview>) reviews.clone();
                         Collections.sort(new_display, new Comparator<CourseReview>() {
                             @Override public int compare(CourseReview c1, CourseReview c2) {
-                                return c2.likesCount - c1.likesCount; // Ascending
+                                return c1.likesCount - c2.likesCount; // Ascending
                             }
 
                         });
@@ -150,7 +151,7 @@ public class CourseReviewsDisplay extends AppCompatActivity{
                         new_display = (ArrayList<CourseReview>) reviews.clone();
                         Collections.sort(new_display, new Comparator<CourseReview>() {
                             @Override public int compare(CourseReview c1, CourseReview c2) {
-                                return c1.likesCount - c2.likesCount; // Ascending
+                                return c2.likesCount - c1.likesCount; // Ascending
                             }
 
                         });
