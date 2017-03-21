@@ -305,11 +305,11 @@ public class AddInstructorReview extends AppCompatActivity {
                 String courseName = course.getText().toString();
 
                 Pattern p = Pattern.compile("[^a-zA-Z]", Pattern.CASE_INSENSITIVE);
-                Matcher firstMatcher = p.matcher(first.getText());
-                Matcher lastMatcher = p.matcher(last.getText());
+                //Matcher firstMatcher = p.matcher(first.getText());
+                //Matcher lastMatcher = p.matcher(last.getText());
 
-                boolean firstB = firstMatcher.find();
-                boolean lastB = lastMatcher.find();
+                //boolean firstB = firstMatcher.find();
+                //boolean lastB = lastMatcher.find();
 
                 TextView message = (TextView) findViewById(R.id.add_info_submitText);
 
@@ -322,10 +322,10 @@ public class AddInstructorReview extends AppCompatActivity {
                         (!rb_difEz.isChecked() && !rb_difMild.isChecked() && !rb_difNorm.isChecked()
                                 && !rb_difTough.isChecked() && !rb_difCrazy.isChecked())) {
                     message.setText("Please fill in every field");
-                } else if (firstB) {
-                    message.setText("Invalid first name");
-                } else if (lastB) {
-                    message.setText("Invalid last name");
+                //} else if (firstB) {
+                    //message.setText("Invalid first name");
+                //} else if (lastB) {
+                    //message.setText("Invalid last name");
                 } else {
 
                     if (courseName.contains(" ")) {
@@ -350,6 +350,24 @@ public class AddInstructorReview extends AppCompatActivity {
                                     review.setToughness(toughness);
                                     review.setElectronics(electronics);
                                     review.setProfComment(String.valueOf(profComment.getText()));
+
+
+                                    // duplicate reviews
+                                    review.setProfName(first.getText().toString().toUpperCase() + " " + last.getText().toString().toUpperCase());
+                                    //review.setCourseName();
+                                    review.setCourseName(course.getText().toString().toUpperCase());
+                                    review.setProf(prof);
+                                    review.setRating(ratingProgress);
+                                    review.setSeekV(textVProgress); //Value of lecture
+                                    review.setSeekU(textUProgress); //Understandable trait
+                                    review.setHelpSession(help_session);
+                                    review.setExtraCredit(extra_credit);
+                                    review.setToughness(toughness);
+                                    review.setElectronics(electronics);
+                                    review.setProfComment(String.valueOf(profComment.getText()));
+                                    // end duplicate
+
+
                                     s.write_instructor_review(review.profName, review);
 
                 /* Go back to select a review */

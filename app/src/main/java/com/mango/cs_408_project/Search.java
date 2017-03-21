@@ -50,6 +50,8 @@ public class Search extends AppCompatActivity {
     Button new_instructor;
     Button new_course;
 
+    boolean isLowerCase;
+
     FacebookLogin f = new FacebookLogin();
 
     @Override
@@ -123,7 +125,14 @@ public class Search extends AppCompatActivity {
                 final TextView search_query = (TextView) findViewById(R.id.searchQueryField);
                 user_input = search_query.getText().toString();
 
-                if (user_input.length() == 0) {
+                isLowerCase = user_input.equals(user_input.toLowerCase());
+
+                if (isLowerCase) {
+                    message.setVisibility(View.VISIBLE);
+                    message.setText("No result");
+                }
+
+                else if (user_input.length() == 0) {
                     message.setVisibility(View.VISIBLE);
                     message.setText("Search field can not be empty");
                 } else {

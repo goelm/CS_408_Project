@@ -4,13 +4,13 @@
     android:layout_height="match_parent">
 
     <Button
-        android:text="Write an instructor review"
+        android:text="Write a course review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/instructor_review_button" />
 
     <Button
-        android:text="Write a course review"
+        android:text="Write an instructor review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/course_review_button" />

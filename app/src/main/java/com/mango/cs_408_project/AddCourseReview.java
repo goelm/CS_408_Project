@@ -135,7 +135,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_hardAccess.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_ezAccess = (RadioButton) findViewById(R.id.add_course_ezAccess);
-                rb_ezAccess.setChecked(false);
+                //rb_ezAccess.setChecked(false);
                 help_session = false;
             }
         });
@@ -143,7 +143,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_ezAccess.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_hardAccess = (RadioButton) findViewById(R.id.add_course_hardAccess);
-                rb_hardAccess.setChecked(false);
+                //rb_hardAccess.setChecked(false);
                 help_session = true;
             }
         });
@@ -152,7 +152,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_yes1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_no1 = (RadioButton) findViewById(R.id.add_course_grade_no);
-                rb_no1.setChecked(false);
+                //rb_no1.setChecked(false);
                 extra_credit = true;
             }
         });
@@ -160,7 +160,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_no1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_yes1 = (RadioButton) findViewById(R.id.add_course_grade_yes);
-                rb_yes1.setChecked(false);
+                //rb_yes1.setChecked(false);
                 extra_credit = false;
             }
         });
@@ -169,7 +169,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_yes2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_no2 = (RadioButton) findViewById(R.id.add_course_misc_no);
-                rb_no2.setChecked(false);
+                //rb_no2.setChecked(false);
                 electronics = true;
             }
         });
@@ -177,7 +177,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_no2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_yes2 = (RadioButton) findViewById(R.id.add_course_misc_yes);
-                rb_yes2.setChecked(false);
+                //rb_yes2.setChecked(false);
                 electronics = false;
             }
         });
@@ -186,7 +186,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_yes3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_no2 = (RadioButton) findViewById(R.id.add_course_book_no);
-                rb_no2.setChecked(false);
+                //rb_no2.setChecked(false);
                 textbook = true;
             }
         });
@@ -194,7 +194,7 @@ public class AddCourseReview extends AppCompatActivity{
         rb_no3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RadioButton rb_yes2 = (RadioButton) findViewById(R.id.add_course_book_yes);
-                rb_yes2.setChecked(false);
+                //rb_yes2.setChecked(false);
                 textbook = false;
             }
         });
@@ -202,10 +202,10 @@ public class AddCourseReview extends AppCompatActivity{
         //Grading Toughness Question
         rb_difEz.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rb_difMild.setChecked(false);
-                rb_difNorm.setChecked(false);
-                rb_difTough.setChecked(false);
-                rb_difCrazy.setChecked(false);
+//                rb_difMild.setChecked(false);
+//                rb_difNorm.setChecked(false);
+//                rb_difTough.setChecked(false);
+//                rb_difCrazy.setChecked(false);
                 toughness = 1;
 
             }
@@ -213,10 +213,10 @@ public class AddCourseReview extends AppCompatActivity{
 
         rb_difMild.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rb_difEz.setChecked(false);
-                rb_difNorm.setChecked(false);
-                rb_difTough.setChecked(false);
-                rb_difCrazy.setChecked(false);
+//                rb_difEz.setChecked(false);
+//                rb_difNorm.setChecked(false);
+//                rb_difTough.setChecked(false);
+//                rb_difCrazy.setChecked(false);
                 toughness = 2;
 
             }
@@ -224,10 +224,10 @@ public class AddCourseReview extends AppCompatActivity{
 
         rb_difNorm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rb_difEz.setChecked(false);
-                rb_difMild.setChecked(false);
-                rb_difTough.setChecked(false);
-                rb_difCrazy.setChecked(false);
+//                rb_difEz.setChecked(false);
+//                rb_difMild.setChecked(false);
+//                rb_difTough.setChecked(false);
+//                rb_difCrazy.setChecked(false);
                 toughness = 3;
 
             }
@@ -235,10 +235,10 @@ public class AddCourseReview extends AppCompatActivity{
 
         rb_difTough.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rb_difEz.setChecked(false);
-                rb_difMild.setChecked(false);
-                rb_difNorm.setChecked(false);
-                rb_difCrazy.setChecked(false);
+//                rb_difEz.setChecked(false);
+//                rb_difMild.setChecked(false);
+//                rb_difNorm.setChecked(false);
+//                rb_difCrazy.setChecked(false);
                 toughness = 4;
 
             }
@@ -246,10 +246,10 @@ public class AddCourseReview extends AppCompatActivity{
 
         rb_difCrazy.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rb_difEz.setChecked(false);
-                rb_difMild.setChecked(false);
-                rb_difNorm.setChecked(false);
-                rb_difTough.setChecked(false);
+//                rb_difEz.setChecked(false);
+//                rb_difMild.setChecked(false);
+//                rb_difNorm.setChecked(false);
+//                rb_difTough.setChecked(false);
                 toughness = 5;
             }
 
@@ -345,10 +345,11 @@ public class AddCourseReview extends AppCompatActivity{
                 (!rb_ezAccess.isChecked() && !rb_hardAccess.isChecked()) ||
                 (!rb_yes1.isChecked() && !rb_no1.isChecked()) ||
                 (!rb_yes2.isChecked() && !rb_no2.isChecked()) ||
-                (!rb_yes3.isChecked() && !rb_no3.isChecked()) ||
-                (!rb_difEz.isChecked() && !rb_difMild.isChecked() &&
-                        !rb_difNorm.isChecked() && !rb_difTough.isChecked() &&
-                        !rb_difCrazy.isChecked()))  {
+                (!rb_yes3.isChecked() && !rb_no3.isChecked()) //||
+                //(!rb_difEz.isChecked() && !rb_difMild.isChecked() &&
+                        //!rb_difNorm.isChecked() && !rb_difTough.isChecked() &&
+                        //!rb_difCrazy.isChecked())
+        )  {
             message.setText("Please fill in every field");
         }
 
