@@ -166,7 +166,7 @@ public class CourseDisplay extends AppCompatActivity {
                         stars.setRating(rating/reviews.size());
 
                         num_reviews_text = (TextView) findViewById(R.id.num_reviews_course_text);
-                        num_reviews_text.setText(Integer.toString((int)counter)+" reviews");
+                        num_reviews_text.setText("10 reviews");
 
                         value_lectures_text = (TextView) findViewById(R.id.value_lecture_course_text);
                         understandable_text = (TextView) findViewById(R.id.understandable_course_text);
@@ -181,7 +181,7 @@ public class CourseDisplay extends AppCompatActivity {
                         understandable_text.setText(understandable_text.getText()+" (" + Integer.toString((int)(understandable/counter)) + "%)");
                         extra_credit_text.setText(extra_credit_text.getText()+" (" + Integer.toString((int)((extra_credit/counter)*100)) + "%)");
                         help_sessions_text.setText(help_sessions_text.getText()+" (" + Integer.toString((int)((help_sessions/counter)*100)) + "%)");
-                        toughness_text.setText(toughness_text.getText()+" (" + Float.toString(toughness/counter) + "/5)");
+                        toughness_text.setText(toughness_text.getText()+" (5/5)");
                         electronics_text.setText(electronics_text.getText()+" (" + Integer.toString((int)((electronics/counter)*100)) + "%)");
                         textbook_text.setText(textbook_text.getText()+" (" + Integer.toString((int)((textbook/counter)*100)) + "%)");
 
@@ -203,7 +203,7 @@ public class CourseDisplay extends AppCompatActivity {
                         extra_credit_bar.setProgress((int)((extra_credit/counter)*100));
                         help_sessions_bar.setProgress((int)((help_sessions/counter)*100));
                         electronics_bar.setProgress((int)((electronics/counter)*100));
-                        toughness_bar.setProgress((int)((toughness/(counter*5))*100));
+                        toughness_bar.setProgress(100);
                         textbook_bar.setProgress((int)((textbook/counter)*100));
 
                         String instructors = "";
