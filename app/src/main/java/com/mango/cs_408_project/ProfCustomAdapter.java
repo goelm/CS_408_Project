@@ -1,10 +1,12 @@
 package com.mango.cs_408_project;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,8 +47,8 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference profInfo = database.getReference("message/reviews/instructor");
 
-    //private FacebookLogin user = new FacebookLogin();
-    String uid = userID();
+    private FacebookLogin user = new FacebookLogin();
+    private String uid = user.userID();
 
     // View lookup cache
     private static class ViewHolder {
@@ -56,8 +58,8 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
         TextView profComment;
         Button likes;
         TextView numOfLikes;
-
         TextView courseName;
+        ImageView delete;
     }
 
     public ProfCustomAdapter(ArrayList<ProfReview> data, Context context) {
@@ -70,30 +72,37 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
     @Override
     public void onClick(View v) {
 
-        int position=(Integer) v.getTag();
+        final int position=(Integer) v.getTag();
         Object object= getItem(position);
-        ProfReview dataModel =(ProfReview) object;
+        final ProfReview dataModel =(ProfReview) object;
 
         switch (v.getId())
         {
             case R.id.likes_button2:
                 onLikeClicked(profInfo , dataModel);
                 break;
+            case R.id.deleteReview2:
+
+                new AlertDialog.Builder(mContext, R.style.AppTheme)
+                        .setTitle("Delete entry")
+                        .setMessage("Are you sure you want to delete this entry?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                                onDeleteClicked(profInfo, dataModel, position);
+
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                break;
         }
 
-    }
-
-    public String userID() {
-        AccessToken user = AccessToken.getCurrentAccessToken();
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // User is signed in
-            return user.getUserId();
-        } else {
-            // No user is signed in
-            System.out.println("No user signed in");
-            return null;
-        }
     }
 
     private void onLikeClicked(final DatabaseReference postRef, final ProfReview course) {
@@ -102,9 +111,6 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
                 //CourseReview course = mutableData.getValue(CourseReview.class);
-                if (course == null) {
-                    return Transaction.success(mutableData);
-                }
                 if (course.likes.containsKey(uid)) {
                     // Unstar the post and remove self from stars
                     course.likesCount = course.likesCount - 1;
@@ -130,6 +136,40 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
         });
     }
 
+    private void onDeleteClicked(final DatabaseReference postRef, final ProfReview course, final int index) {
+        postRef.child(course.profName).child(course.getKey()).runTransaction(new Transaction.Handler() {
+
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                //CourseReview course = mutableData.getValue(CourseReview.class);
+                if (course.userId.equals(uid)) {
+                    // Unstar the post and remove self from stars
+                    dataSet.remove(index);
+                    //course.setCourseName("Deleted");
+                    //course.setRating(0);
+                    //course.setSemesterTaken("Deleted");
+                    //course.setProfComment("Deleted");
+                    //course.likesCount = 0;
+
+                    postRef.child(course.profName).child(course.getKey()).removeValue();
+
+                } else { //Nothing
+
+                }
+                postRef.child(course.profName).child(course.getKey()).setValue(null);
+                //notifyDataSetChanged();
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b,
+                                   DataSnapshot dataSnapshot) {
+                // Transaction completed
+                //Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+            }
+        });
+    }
+
     private int lastPosition = -1;
 
     @Override
@@ -137,26 +177,26 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
         // Get the data item for this position
         ProfReview dataModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
-        ProfCustomAdapter.ViewHolder viewHolder; // view lookup cache stored in tag
+        ViewHolder viewHolder; // view lookup cache stored in tag
 
         final View result;
 
         if (convertView == null) {
 
-            viewHolder = new ProfCustomAdapter.ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.prof_review_item, parent, false);
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.prof_review_item, null);
             viewHolder.stars = (RatingBar) convertView.findViewById(R.id.prof_reviewStars);
             viewHolder.profComment = (TextView) convertView.findViewById(R.id.profComment2);
             //viewHolder.semesterTaken = (TextView) convertView.findViewById(R.id.prof_semester_taken);
             viewHolder.courseName = (TextView) convertView.findViewById(R.id.instructor_course_name);
             viewHolder.likes = (Button) convertView.findViewById(R.id.likes_button2);
             viewHolder.numOfLikes = (TextView) convertView.findViewById(R.id.badge_notification2);
-
+            viewHolder.delete = (ImageView) convertView.findViewById(R.id.deleteReview2);
 
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ProfCustomAdapter.ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         lastPosition = position;
@@ -171,7 +211,15 @@ public class ProfCustomAdapter extends ArrayAdapter<ProfReview> implements View.
         viewHolder.likes.setOnClickListener(this);
         viewHolder.likes.setTag(position);
         viewHolder.numOfLikes.setText(String.valueOf(dataModel.likesCount));
-        // Return the completed view to render on screen
+        viewHolder.delete.setOnClickListener(this);
+        viewHolder.delete.setTag(position);
+
+        //Remove delete button if it isn't the user's review
+        if (dataModel.getUserId() == null) {
+            viewHolder.delete.setVisibility(View.GONE);
+        } else if (!dataModel.getUserId().equals(uid)) {
+            viewHolder.delete.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
