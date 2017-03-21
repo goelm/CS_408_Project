@@ -192,7 +192,7 @@ public class ProfDisplay extends AppCompatActivity {
                     if(i != 0){
                         courses += ", ";
                     }
-                    courses += courses_taught.get(i) + " (" + Float.toString(courses_ratings.get(i)/courses_count.get(i)) + ")";
+                    courses += courses_taught.get(i) + " (" + Double.toString(0.5*(courses_ratings.get(i)/courses_count.get(i))) + ")";
                 }
 
                 courses_list.setText(courses);
