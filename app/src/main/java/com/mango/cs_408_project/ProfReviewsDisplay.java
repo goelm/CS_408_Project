@@ -59,24 +59,6 @@ public class ProfReviewsDisplay extends  AppCompatActivity{
         name_text = (TextView) findViewById(R.id.reviews_name_text);
         name_text.setText("Reviews for\n" + user_input);
 
-//        Thread t = new Thread(new Runnable() {
-//            public void run() {
-//                try {
-//                    display_prof_review(user_input.toUpperCase());
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        t.start();
-//        try {
-//            t.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-
-
         display_prof_review(user_input.toUpperCase());
         //Detects like button
         profInfo.addChildEventListener(new ChildEventListener() {
