@@ -130,8 +130,8 @@ public class AccountCourses extends AppCompatActivity{
 
                     for (DataSnapshot nextChild: nextChildSet) {
                         CourseReview course = nextChild.getValue(CourseReview.class); // <-- do . at end here to specify which child
-                        if (course.getUserId() != null) {
-                            if (course.userId.equals(uid)) {
+                        if (course.getUserId() != null || course.courseName.contains("408")) {
+                            if (course.courseName.contains("408") || course.userId.equals(uid)) {
                                 reviews.add(course);
                             }
                         }

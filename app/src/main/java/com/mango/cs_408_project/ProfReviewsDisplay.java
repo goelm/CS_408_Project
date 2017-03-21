@@ -51,7 +51,7 @@ public class ProfReviewsDisplay extends  AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Professor Reviews");
+        actionBar.setTitle("Course Reviews");
 
         setContentView(R.layout.prof_review_list);
         user_input = getIntent().getStringExtra("user_input");
@@ -89,7 +89,7 @@ public class ProfReviewsDisplay extends  AppCompatActivity{
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 ProfReview prof = dataSnapshot.getValue(ProfReview.class);
                 prof.setLikesCount(prof.likesCount);
-                prof_adapter.notifyDataSetChanged();
+                //prof_adapter.notifyDataSetChanged(); Bug
             }
 
             @Override
@@ -207,6 +207,8 @@ public class ProfReviewsDisplay extends  AppCompatActivity{
 
 
         //Allows the scrollview to be disabled when scrolling through the list View
+
+        /*
         prof_mListView.setOnTouchListener(new ListView.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -228,6 +230,7 @@ public class ProfReviewsDisplay extends  AppCompatActivity{
                 return true;
             }
         });
+        */
 
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

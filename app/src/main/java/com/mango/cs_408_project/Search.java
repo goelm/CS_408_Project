@@ -16,6 +16,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,17 +50,13 @@ public class Search extends AppCompatActivity {
     Button new_instructor;
     Button new_course;
 
-
-
-
+    FacebookLogin f = new FacebookLogin();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Review Search");
-
         setContentView(R.layout.search);
 
         Button submit_button = (Button) findViewById(R.id.searchSubmit);
@@ -115,6 +114,10 @@ public class Search extends AppCompatActivity {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (AccessToken.getCurrentAccessToken() == null) { //For stable bug purposes
+                    goLoginScreen();
+                }
+
                 foundprof = false;
                 foundcourse = false;
                 final TextView search_query = (TextView) findViewById(R.id.searchQueryField);
@@ -171,7 +174,7 @@ public class Search extends AppCompatActivity {
                             public void onCancelled(DatabaseError databaseError) {
                             }
                         });
-                        courseInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+                        courseInfo.addValueEventListener(new ValueEventListener() { //BUG change to addListenerForSingleValueEvent
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -227,5 +230,25 @@ public class Search extends AppCompatActivity {
             i.putExtra("user_input", user_input);
             Search.this.startActivity(i);
         }
+    }
+
+    private void goLoginScreen() {
+        //Test to see if the user is logged out
+        f.signedIn = false;
+        LoginManager.getInstance().logOut();
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, FacebookLogin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void logout(View view) {
+        f.signedIn = false;
+        //Test to see if the user
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        goLoginScreen();
     }
 }
