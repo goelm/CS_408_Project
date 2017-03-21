@@ -89,8 +89,11 @@ public class AddInstructorReview extends AppCompatActivity {
         if (getIntent().hasExtra("name")) {
             String full_name = getIntent().getStringExtra("name");
             String[] names = full_name.split(" ");
-            first.setText(names[0]);
             last.setText(names[1]);
+        }
+        else{
+            first.setText("SpongeBob");
+            last.setText("SquarePants");
         }
 
         rb_instructor = (RadioButton) findViewById(R.id.instructor);
