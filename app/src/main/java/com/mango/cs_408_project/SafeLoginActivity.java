@@ -66,7 +66,7 @@ public class SafeLoginActivity extends AppCompatActivity {
     private void goLoginScreen() {
         //Test to see if the user is logged out
         f.signedIn = false;
-        //LoginManager.getInstance().logOut();
+        LoginManager.getInstance().logOut();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, FacebookLogin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

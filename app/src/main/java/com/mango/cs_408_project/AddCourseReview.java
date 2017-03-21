@@ -397,6 +397,7 @@ public class AddCourseReview extends AppCompatActivity{
                 /* Go back to select a review */
                             Intent i = new Intent(AddCourseReview.this, SelectReview.class);
                             AddCourseReview.this.startActivity(i);
+                            finish();
                         } else {
                             message.setText("Please follow the format \"CS 408\" for course name");
                         }

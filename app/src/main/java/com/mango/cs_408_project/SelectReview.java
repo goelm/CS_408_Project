@@ -35,14 +35,27 @@ public class SelectReview extends AppCompatActivity {
 
         Button instructor = (Button) findViewById(R.id.instructor_review_button);
         Button course = (Button) findViewById(R.id.course_review_button);
-        //Button logOut = (Button) findViewById(R.id.logout_button);
+        Button logOut = (Button) findViewById(R.id.logout_button);
 
         Button search_button = (Button) findViewById(R.id.search_select_button);
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            goLoginScreen();
+        }
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+                logout(v);
+            }
+        });
+
 
         instructor.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i=new Intent(SelectReview.this, AddInstructorReview.class);
                 SelectReview.this.startActivity(i);
+                finish(); //added
             }
         });
 
@@ -50,6 +63,7 @@ public class SelectReview extends AppCompatActivity {
             public void onClick(View v) {
                 Intent j=new Intent(SelectReview.this, AddCourseReview.class);
                 SelectReview.this.startActivity(j);
+                finish(); //added
             }
         });
 
@@ -85,4 +99,24 @@ public class SelectReview extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void goLoginScreen() {
+        //Test to see if the user is logged out
+        f.signedIn = false;
+        LoginManager.getInstance().logOut();
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, Search.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+
+    public void logout(View view) {
+        f.signedIn = false;
+        //Test to see if the user
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        goLoginScreen();
+    }
+
 }

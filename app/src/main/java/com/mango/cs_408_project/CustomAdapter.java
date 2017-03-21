@@ -99,7 +99,6 @@ public class CustomAdapter extends ArrayAdapter<CourseReview> implements View.On
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
-                                onDeleteClicked(courseInfo, dataModel, position);
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -109,12 +108,14 @@ public class CustomAdapter extends ArrayAdapter<CourseReview> implements View.On
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+                        onDeleteClicked(courseInfo, dataModel, position);
+
 
 
                 break;
 
             case R.id.info_item:
-                Snackbar.make(v, "Course Description: " + dataModel.courseDescr, Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "Course Description: " + dataModel.courseName /*BUG*/, Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
                 break;
 
@@ -134,7 +135,7 @@ public class CustomAdapter extends ArrayAdapter<CourseReview> implements View.On
                 if (course.likes.containsKey(uid)) {
                     // Unstar the post and remove self from stars
                     course.likesCount = course.likesCount - 1;
-                    course.likes.remove(uid);
+                    //course.likes.remove(uid);  Bug
                 } else {
                     // Star the post and add self to stars
                     course.likesCount = course.likesCount + 1;
@@ -242,13 +243,6 @@ public class CustomAdapter extends ArrayAdapter<CourseReview> implements View.On
         } else if (!dataModel.getUserId().equals(uid)) {
             viewHolder.delete.setVisibility(View.GONE);
         }
-
-//        viewHolder.upVoteButton.setOnClickListener(this);
-//        viewHolder.downVoteButton.setOnClickListener(this);
-//        viewHolder.upVoteButton.setTag(position);
-//        viewHolder.downVoteButton.setTag(position);
-//        viewHolder.upVote.setText(dataModel.upVote);
-//        viewHolder.downVote.setText(dataModel.downVote);
 
         // Return the completed view to render on screen
         return convertView;
