@@ -343,7 +343,6 @@ public class AddCourseReview extends AppCompatActivity{
 
         if (readytosubmit == 0) {
             readytosubmit = 1;
-            //message.setText("test");
             return;
         }
 
