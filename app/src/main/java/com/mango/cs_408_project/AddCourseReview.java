@@ -46,6 +46,8 @@ public class AddCourseReview extends AppCompatActivity{
     int value; //ranges from 0 to 100
     int understand; //ranges from 0 to 100
 
+    int readytosubmit = 0;
+
     RadioButton rb_ezAccess;
     RadioButton rb_hardAccess;
     RadioButton rb_yes1;
@@ -320,6 +322,8 @@ public class AddCourseReview extends AppCompatActivity{
     }
 
     public void submit(){
+
+
         TextView instructor = (TextView) findViewById(R.id.add_course_instructor);
         TextView semester = (TextView) findViewById(R.id.add_semesterField);
         TextView description = (TextView) findViewById(R.id.add_course_description);
@@ -337,6 +341,11 @@ public class AddCourseReview extends AppCompatActivity{
 
         TextView message = (TextView) findViewById(R.id.add_course_submitText);
 
+        if (readytosubmit == 0) {
+            readytosubmit = 1;
+            //message.setText("test");
+            return;
+        }
 
         String courseName = course.getText().toString();
 

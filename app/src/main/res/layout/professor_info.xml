@@ -69,7 +69,7 @@
             android:layout_height="44dp"
             android:layout_gravity="center"
             android:id="@+id/instructor_rating"
-            android:isIndicator="true"
+            android:isIndicator="false"
             style="@style/Widget.AppCompat.RatingBar" />
 
         <TextView
