@@ -75,12 +75,10 @@ public class AddCourseReview extends AppCompatActivity{
     float add_course_ratingProgress = 0;
 
     Button submit_button;
-    Button submit_share_button;
     EditText courseComment;
 
     TextView course;
 
-    ShareDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +109,6 @@ public class AddCourseReview extends AppCompatActivity{
         seekU = (SeekBar) findViewById(R.id.seekUnderstand);
 
         submit_button = (Button) findViewById(R.id.course_submitBut);
-        submit_share_button = (Button) findViewById(R.id.course_submit_and_share_button);
 
         textU = (TextView) findViewById(R.id.textUnderstand);
         textV = (TextView) findViewById(R.id.textValue);
@@ -302,19 +299,6 @@ public class AddCourseReview extends AppCompatActivity{
         /* When submitting the review */
         submit_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                submit();
-            }
-
-        });
-
-        dialog = new ShareDialog(this);
-        submit_share_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (ShareDialog.canShow(ShareLinkContent.class)) {
-                    //TODO: fix content shared on Facebook here
-                    ShareLinkContent content = new ShareLinkContent.Builder().setContentTitle("Title").setContentDescription("description").build();
-                    dialog.show(content);
-                }
                 submit();
             }
 
