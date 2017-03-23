@@ -224,6 +224,14 @@ public class ProfReviewsDisplay extends  AppCompatActivity{
                     ProfReview instructor = child.getValue(ProfReview.class); // <-- do . at end here to specify which child
                     prof_reviews.add(instructor);
                 }
+
+                // bug, I think....
+                for (DataSnapshot child: children) {
+                    ProfReview instructor = child.getValue(ProfReview.class); // <-- do . at end here to specify which child
+                    prof_reviews.add(instructor);
+                }
+                // ends
+
                 //Set statistics here
                 prof_adapter.notifyDataSetChanged();
 

@@ -351,23 +351,6 @@ public class AddInstructorReview extends AppCompatActivity {
                                     review.setElectronics(electronics);
                                     review.setProfComment(String.valueOf(profComment.getText()));
 
-
-                                    // duplicate reviews
-                                    review.setProfName(first.getText().toString().toUpperCase() + " " + last.getText().toString().toUpperCase());
-                                    //review.setCourseName();
-                                    review.setCourseName(course.getText().toString().toUpperCase());
-                                    review.setProf(prof);
-                                    review.setRating(ratingProgress);
-                                    review.setSeekV(textVProgress); //Value of lecture
-                                    review.setSeekU(textUProgress); //Understandable trait
-                                    review.setHelpSession(help_session);
-                                    review.setExtraCredit(extra_credit);
-                                    review.setToughness(toughness);
-                                    review.setElectronics(electronics);
-                                    review.setProfComment(String.valueOf(profComment.getText()));
-                                    // end duplicate
-
-
                                     s.write_instructor_review(review.profName, review);
 
                 /* Go back to select a review */
